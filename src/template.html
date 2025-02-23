@@ -3,9 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
+    <title>Todo List App</title>
 </head>
 <body>
-    
+    <div class="todo-header">
+        <h1>Todo App</h1>
+        <div class="todo-list-modal-div">
+            <button id="list-open-button">List</button>
+            <dialog id="list-modal">
+            <h2>Create/Delete List</h2>
+            <input type="text" id="list-modal-input" placeholder="Enter list name..." required>
+            <button id="list-modal-input-button">Create</button>
+            <button id="list-modal-delete-button">Delete</button>
+            <button id="list-modal-close-button">Close</button>
+            </dialog>
+        </div>
+        <div class="todo-list-item-modal-div">
+            <button id="list-item-open-button">List Item</button>
+            <dialog id="list-item-modal">
+                <h2>Create/Delete List Item</h2>
+                <input type="text" id="list-item-modal-input-name" placeholder="Enter list item name...">
+                <input type="text" id="list-item-modal-input-title" placeholder="Enter list item title...">
+                <input type="text" id="list-item-modal-input-desc" placeholder="Enter list item description...">
+                <input type="text" id="list-item-modal-input-dueDate" placeholder="Enter list item due date...">
+                <input type="text" id="list-item-modal-input-priority" placeholder="Enter list item priority...">
+                <button id="list-item-modal-input-button">Create</button>
+                <button id="list-item-modal-delete-button">Delete</button>
+                <button id="list-item-modal-close-button">Close</button>
+              </dialog>
+        </div>
+    </div>
+    <div class="todo-container">
+
+    </div>
 </body>
 </html>
