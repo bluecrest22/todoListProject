@@ -1,9 +1,18 @@
 import "./styles.css";
 import { TodoList, TodoListItem } from "./todo-list";
 import {ListDisplay} from "./display-list";
+import { storeTodoLists, retrieveTodoLists, storageAvailable } from "./local-storage";
 
 let currTodoLists = [];
 const container = document.querySelector(".todo-container");
+
+if (storageAvailable("localStorage")) {
+    const todoLists = retrieveTodoLists();
+    if(todoLists) {
+        currTodoLists = todoLists;
+    }
+}
+displayLists();
 
 // Add List Modal
 const listModal = document.querySelector("#list-modal");
@@ -16,6 +25,7 @@ inputListModalBtn.addEventListener('click', () => {
     const modalInput = document.querySelector("#list-modal-input");
     if(modalInput.value !== "") {
         currTodoLists.push(new TodoList(modalInput.value));
+        storeTodoLists(currTodoLists);
         displayLists();
         modalInput.value = "";
         listModal.close();
@@ -29,6 +39,7 @@ deleteListModalBtn.addEventListener('click', () => {
         const index = currTodoLists.findIndex(hasName);
         if(index != -1) {
             currTodoLists = currTodoLists.filter((word) => word.getName() != modalInput.value);
+            storeTodoLists(currTodoLists);
             displayLists();
         }
         listModal.close();
@@ -69,6 +80,7 @@ inputListItemModalBtn.addEventListener('click', () => {
         const index = currTodoLists.findIndex(hasName);
         if(index != -1) {
             currTodoLists[index].addTodoListItem(new TodoListItem(modalInputTitle.value,modalInputDesc.value,modalInputDueDate.value,modalInputPriority.value));
+            storeTodoLists(currTodoLists);
             listItemModal.close();
             modalInputName.value = "";
             modalInputTitle.value = "";
@@ -89,6 +101,7 @@ deleteListItemModalBtn.addEventListener('click', () => {
             let currTodoListItems = currTodoLists[index].getTodoListItems();
             currTodoListItems = currTodoListItems.filter((word) => word.getTitle() != title);
             currTodoLists[index].setTodoListItems(currTodoListItems);
+            storeTodoLists(currTodoLists);
             displayLists();
         }
         listModal.close();
@@ -134,6 +147,5 @@ function displayLists() {
                 listItemDisplayBtn.textContent = "Show";
             }
         });
-
     }
 }
